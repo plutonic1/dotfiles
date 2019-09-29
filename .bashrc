@@ -179,17 +179,7 @@ update_pip(){
 }
 
 updaterc() {
-    if which curl &> /dev/null; then
-        rm ~/.bashrc
-        curl https://raw.githubusercontent.com/plutonic1/bashrc/master/.bashrc > ~/.bashrc
-        . ~/.bashrc
-    elif which wget &> /dev/null; then
-        rm ~/.bashrc
-        wget -O ~/.bashrc https://raw.githubusercontent.com/plutonic1/bashrc/master/.bashrc
-        . ~/.bashrc
-    else
-        echo "no download tool found"
-    fi
+    rm -rf /tmp/dotfiles && git clone https://github.com/plutonic1/dotfiles.git /tmp/dotfiles && bash /tmp/dotfiles/install.sh
 }
 
 #https://stackoverflow.com/questions/4643438/how-to-search-contents-of-multiple-pdf-files/4643518#4643518
