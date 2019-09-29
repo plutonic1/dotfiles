@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 0.9"
+    echo "bashrc version 0.91"
     export TERM=xterm #tmux workaround
 fi
 
@@ -39,9 +39,6 @@ alias ls='ls --color'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
 alias last='last -i'
-
-#https://stackoverflow.com/questions/5785549/able-to-push-to-all-git-remotes-with-the-one-command/18674313#18674313
-git config --global alias.pushall '!git remote | xargs -L1 git push --all'
 
 # http://superuser.com/questions/137438/how-to-unlimited-bash-shell-history
 # Eternal bash history.
