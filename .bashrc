@@ -179,7 +179,11 @@ update_pip(){
 }
 
 updaterc() {
-    rm -rf /tmp/dotfiles && git clone https://github.com/plutonic1/dotfiles.git /tmp/dotfiles && bash /tmp/dotfiles/install.sh
+    if uname -a | grep -q "lineageos"; then
+        rm -rf /data/data/com.termux/files/usr/tmp/dotfiles && git clone https://github.com/plutonic1/dotfiles.git /data/data/com.termux/files/usr/tmp/dotfiles && bash /data/data/com.termux/files/usr/tmp/dotfiles/install.sh
+    else
+        rm -rf /tmp/dotfiles && git clone https://github.com/plutonic1/dotfiles.git /tmp/dotfiles && bash /tmp/dotfiles/install.sh 
+    fi   
 }
 
 #https://stackoverflow.com/questions/4643438/how-to-search-contents-of-multiple-pdf-files/4643518#4643518
