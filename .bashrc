@@ -134,40 +134,6 @@ u() {
     fi
 }
 
-# https://gist.github.com/mcustiel/d3dd1f9a4f9a8965f98957348d92a9ad
-ssh_init() {
-
-	LINES=$(ps aux | grep ssh-agent | wc -l)
-	PPKDIR=~/.ssh/keys
-	PATTERN="\\.pub$"
-	if [ "2" -gt $LINES ] ; then
-		ssh-agent -s > ~/.ssh-env-vars
-		. ~/.ssh-env-vars
-
-		for key in $(ls $PPKDIR) ; do
-			# Add only private keys to ssh-agent
-			if [[ ! $key =~ $PATTERN ]]; then
-				ssh-add $PPKDIR/$key
-			fi
-		done
-	else
-		. ~/.ssh-env-vars
-	fi
-}
-
-git_init() {
-
-	LINES=$(ps aux | grep ssh-agent | wc -l)
-	GIT_KEY=~/.ssh/git
-	if [ "2" -gt $LINES ] ; then
-		ssh-agent -s > ~/.ssh-env-vars
-		. ~/.ssh-env-vars
-		ssh-add $GIT_KEY
-	else
-		. ~/.ssh-env-vars
-	fi
-}
-
 update_pip(){
     if which pip2 &> /dev/null; then
         pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip2 install -U
