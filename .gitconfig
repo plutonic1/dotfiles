@@ -1,5 +1,5 @@
 [alias]
 	pushall = !git remote | xargs -L1 git push --all
 [user]
-	email = plutonic@plutonic.tk
+	email = github@plutonic.tk
 	name = plutonic
