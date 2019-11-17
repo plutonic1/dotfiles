@@ -11,7 +11,3 @@ echo "\${template1 $TYPE\ IPv4}       \${template3}$ipv4_address"
 while read -r ipv6_address; do
     echo "\${template1 $TYPE\ IPv6}   \${template3}$ipv6_address"
 done <<< "$ipv6_addresses"
-
-
-
-
