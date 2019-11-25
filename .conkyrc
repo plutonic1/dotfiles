@@ -38,6 +38,8 @@ conky.config = {
     color1 = 'AABBFF',
     color2 = 'FF993D',
     color3 = 'AAAAAA',
+    color4 = 'FF0000',
+    color5 = '00FF00',
  
     -- layouting
     template0 = [[${font Liberation Sans:bold:size=11}${color2}\1 ${color3}${hr 2}${font}]],
@@ -51,6 +53,7 @@ conky.text = [[
 ${template0 Info}
 ${template1 Date}                                                           ${template3}${color3}${time %a,}${color}${time %e %B %G}
 ${template1 Time}                                                           ${template3}${time %T}
+${template1 syncting}                                                       ${template3}${if_match "${exec pidof /usr/bin/syncthing}" == ""}${color4}not running${else}${color5}running${endif}${template3}
  
 ${template0 System}
 ${template1 Hostname}                                                       ${template3}${nodename}
