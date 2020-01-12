@@ -129,7 +129,7 @@ u() {
         apt-cyg update
         updaterc
     elif which pacman &> /dev/null; then
-        yaourt -Syu --aur
+        yay -Syu
         updaterc
     fi
 }
