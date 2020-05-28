@@ -26,6 +26,9 @@ alias pw='head /dev/urandom | tr -dc A-Za-z0-9 | head -c20; echo'
 
 alias dog='pygmentize -g' # https://stackoverflow.com/questions/7851134/syntax-highlighting-colorizing-cat/14799752#14799752
 
+#let ssh use the gpg-agent for auth
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
 #taken from http://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
 
 #alias mount='mount | column -t'
