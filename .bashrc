@@ -2,11 +2,9 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2019.10.07"
+    echo "bashrc version 2020.06.02"
     export TERM=xterm #tmux workaround
 fi
-
-alias vpn="$(which sudo) grep 'Learn:\|connection-reset' /var/log/openvpn"
 
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test1000.zip'
 
@@ -298,6 +296,15 @@ transfer() {
     echo -e ""
 }
 alias transfer=transfer
+
+ssh(){
+    /usr/bin/ssh "$@"
+    
+    if [ $? -eq "255" ]; then
+        echo "fixing gpg..."
+        gpg-connect-agent updatestartuptty /bye >/dev/null
+    fi
+}
 
 export VISUAL=nano
 export LANG=de_DE.UTF-8
