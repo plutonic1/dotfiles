@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2020.06.02"
+    echo "bashrc version 2020.12.31"
     export TERM=xterm #tmux workaround
 fi
 
@@ -146,11 +146,7 @@ update_pip(){
 }
 
 updaterc() {
-    if uname -a | grep -q "lineageos"; then
-        rm -rf /data/data/com.termux/files/usr/tmp/dotfiles && git clone https://github.com/plutonic1/dotfiles.git /data/data/com.termux/files/usr/tmp/dotfiles && bash /data/data/com.termux/files/usr/tmp/dotfiles/install.sh
-    else
-        rm -rf /tmp/dotfiles && git clone https://github.com/plutonic1/dotfiles.git /tmp/dotfiles && bash /tmp/dotfiles/install.sh 
-    fi   
+	tmpfolder=$(mktemp -d) && git clone https://github.com/plutonic1/dotfiles.git $tmpfolder && bash "$tmpfolder/install.sh"   
 }
 
 #https://stackoverflow.com/questions/4643438/how-to-search-contents-of-multiple-pdf-files/4643518#4643518
