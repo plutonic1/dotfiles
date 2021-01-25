@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2020.12.31"
+    echo "bashrc version 2021.01.25"
     export TERM=xterm #tmux workaround
 fi
 
@@ -72,6 +72,15 @@ if ! uname -a | grep -q "lineageos"; then
     alias chown='chown --preserve-root'
     alias chmod='chmod --preserve-root'
     alias chgrp='chgrp --preserve-root'
+fi
+
+if uname -a | grep -q "microsoft"; then
+	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+	ss -a | grep -q $SSH_AUTH_SOCK
+	if [ $? -ne 0 ]; then
+			rm -f $SSH_AUTH_SOCK
+			(setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:$HOME/.ssh/wsl2-ssh-pageant.exe >/dev/null 2>&1 &)
+	fi
 fi
 
 if [ -f "$HOME/.aliases" ];
