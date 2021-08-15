@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2021.01.25"
+    echo "bashrc version 2021.08.15"
     export TERM=xterm #tmux workaround
 fi
 
@@ -23,6 +23,8 @@ alias http='python3 -m http.server'
 alias pw='head /dev/urandom | tr -dc A-Za-z0-9 | head -c20; echo'
 
 alias dog='pygmentize -g' # https://stackoverflow.com/questions/7851134/syntax-highlighting-colorizing-cat/14799752#14799752
+
+alias n='$(which sudo) netstat -tulpen'
 
 #let ssh use the gpg-agent for auth
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -180,18 +182,6 @@ r() {
     $(which sudo) reboot && exit
 }
 
-#p() {
-#    $(which sudo) true
-#	echo poweroff in ...
-#
-#   for i in {10..1}
-#    do
-#        echo -e "$i"
-#        sleep 1
-#    done
-#    $(which sudo) poweroff && exit
-#}
-
 fixlocale() {
     sudo locale-gen de_DE.UTF-8
     sudo update-locale LANG=de_DE.UTF-8
@@ -267,40 +257,6 @@ t2(){
 
     tmux attach -t $SESSION
 }
-
-transfer() {
-
-    if [[ -d $1 ]]; then
-        location="/tmp/$1.zip"
-        basename="$(basename $1).zip"
-        echo "basename: $basename"
-        zip -r $location $1        
-    elif [[ -f $1 ]]; then
-        location=$1
-        basename=$1
-    else
-        echo "$1 is not valid"
-        exit 1
-    fi
-
-    address=$(curl -k --progress-bar --upload-file "$location" https://plutonic.tk:8123/$(basename $basename) | tee /dev/null)    
-    address_direct=$(echo $address | sed -e "s/8123\//8123\/get\//g")
-    
-    echo $address_direct
-    
-    type xclip &> /dev/null    
-    if [ $? -eq "0" ]; then
-        echo $address_direct | xclip -selection Clipboard
-    fi
-    
-    type termux-set-clipboard &> /dev/null    
-    if [ $? -eq "0" ]; then
-        termux-clipboard-set $address_direct
-    fi
-    
-    echo -e ""
-}
-alias transfer=transfer
 
 ssh(){
     /usr/bin/ssh "$@"
