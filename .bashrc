@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2021.08.15"
+    echo "bashrc version 2021.10.17"
     export TERM=xterm #tmux workaround
 fi
 
