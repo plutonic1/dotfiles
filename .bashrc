@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2021.10.17"
+    echo "bashrc version 2021.11.20"
     export TERM=xterm #tmux workaround
 fi
 
@@ -100,10 +100,6 @@ if [ -f "$HOME/.aliases" ];
 then
     source "$HOME/.aliases"
 fi
-
-# if [ -d "$HOME/bin" ] ; then
-    # PATH="$HOME/bin:$PATH"
-# fi
 
 p(){
     ps aux | grep "$1"
