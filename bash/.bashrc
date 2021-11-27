@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2021.11.27"
+    echo "bashrc version 2021.11.27-2"
     export TERM=xterm #tmux workaround
 fi
 
@@ -164,7 +164,8 @@ update_pip(){
 }
 
 updaterc() {
-	tmpfolder=$(mktemp -d) && git clone https://github.com/plutonic1/dotfiles.git $tmpfolder && bash "$tmpfolder/install.sh"   
+	# tmpfolder=$(mktemp -d) && git clone https://github.com/plutonic1/dotfiles.git $tmpfolder && bash "$tmpfolder/install.sh"
+    git clone https://github.com/plutonic1/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && stow -t ~ */
 }
 
 #https://stackoverflow.com/questions/4643438/how-to-search-contents-of-multiple-pdf-files/4643518#4643518
@@ -226,7 +227,7 @@ k() {
 }
 
 t4(){
-    SESSION=2
+    SESSION=4
 
     tmux has-session -t $SESSION &> /dev/null
 
@@ -274,7 +275,7 @@ ssh(){
     fi
 }
 
-export VISUAL=nano
+export VISUAL=vi
 export LANG=de_DE.UTF-8
 
 #LS_COLORS='di=36:ln=32:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43':
