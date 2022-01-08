@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2021.11.27-3"
+    echo "bashrc version 2022.01.08-1"
     export TERM=xterm #tmux workaround
 fi
 
@@ -274,6 +274,19 @@ ssh(){
         gpg-connect-agent updatestartuptty /bye >/dev/null
     fi
 }
+
+wsl_docker(){
+	DOCKER_DISTRO="Ubuntu-20.04"
+	DOCKER_DIR=/mnt/wsl/shared-docker
+	DOCKER_SOCK="$DOCKER_DIR/docker.sock"
+	export DOCKER_HOST="unix://$DOCKER_SOCK"
+	if [ ! -S "$DOCKER_SOCK" ]; then
+		mkdir -pm o=,ug=rwx "$DOCKER_DIR"
+		chgrp docker "$DOCKER_DIR"
+		/mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+	fi
+}
+
 
 export VISUAL=vi
 export LANG=de_DE.UTF-8
