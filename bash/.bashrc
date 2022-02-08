@@ -2,8 +2,8 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "bashrc version 2022.01.08-1"
-    export TERM=xterm #tmux workaround
+    echo "dofiles version 2022.02.08-1"
+    # export TERM=xterm #tmux workaround
 fi
 
 # If not running interactively, don't do anything
@@ -102,7 +102,7 @@ then
 fi
 
 p(){
-    ps aux | grep "$1"
+    ps aux | grep "$1" | grep -v
 }
 
 h(){
@@ -153,19 +153,20 @@ u() {
     fi
 }
 
-update_pip(){
-    if which pip2 &> /dev/null; then
-        pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip2 install -U
-    fi
+# update_pip(){
+#     if which pip2 &> /dev/null; then
+#         pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip2 install -U
+#     fi
 
-    if which pip3 &> /dev/null; then
-        pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip3 install -U
-    fi
-}
+#     if which pip3 &> /dev/null; then
+#         pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip3 install -U
+#     fi
+# }
 
 updaterc() {
 	# tmpfolder=$(mktemp -d) && git clone https://github.com/plutonic1/dotfiles.git $tmpfolder && bash "$tmpfolder/install.sh"
-    git -C ~/.dotfiles pull || git clone https://github.com/plutonic1/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && stow -t ~ */
+    current_dir=$(pwd)
+    git -C ~/.dotfiles pull || git clone https://github.com/plutonic1/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && stow -t ~ */ && cd $current_dir
 }
 
 #https://stackoverflow.com/questions/4643438/how-to-search-contents-of-multiple-pdf-files/4643518#4643518
@@ -182,7 +183,7 @@ r() {
 	$(which sudo) true
     echo reboot in ...
 
-    for i in {5..1}
+    for i in {10..1}
     do
         echo -e "$i"
         sleep 1
@@ -218,53 +219,53 @@ extract() {
     fi
 }
 
-k() {
-    if ! tmux ls | grep -q "copy"; then
-        tmux new -s copy
-    else
-        tmux a -t copy
-    fi
-}
+# k() {
+#     if ! tmux ls | grep -q "copy"; then
+#         tmux new -s copy
+#     else
+#         tmux a -t copy
+#     fi
+# }
 
-t4(){
-    SESSION=4
+# t4(){
+#     SESSION=4
 
-    tmux has-session -t $SESSION &> /dev/null
+#     tmux has-session -t $SESSION &> /dev/null
 
-    if [ $? -eq 0 ]; then
-        tmux attach -t $SESSION
-        exit 0;
-    fi
+#     if [ $? -eq 0 ]; then
+#         tmux attach -t $SESSION
+#         exit 0;
+#     fi
 
-    tmux new-session -d -s $SESSION
-    tmux split-window -h -t $SESSION:0
-    tmux split-window -h -t $SESSION:0
-    tmux split-window -h -t $SESSION:0
-    tmux select-layout -t $SESSION "a490,119x39,0,0[120x19,0,0{59x19,0,0,11,60x19,60,0,12},120x19,0,20{59x19,0,20,13,60x19,60,20,18}]"
-    tmux attach -t $SESSION
-}
+#     tmux new-session -d -s $SESSION
+#     tmux split-window -h -t $SESSION:0
+#     tmux split-window -h -t $SESSION:0
+#     tmux split-window -h -t $SESSION:0
+#     tmux select-layout -t $SESSION "a490,119x39,0,0[120x19,0,0{59x19,0,0,11,60x19,60,0,12},120x19,0,20{59x19,0,20,13,60x19,60,20,18}]"
+#     tmux attach -t $SESSION
+# }
 
-t2(){
-    SESSION=2
+# t2(){
+#     SESSION=2
 
-    tmux has-session -t $SESSION &> /dev/null
+#     tmux has-session -t $SESSION &> /dev/null
 
-    if [ $? -eq 0 ]; then
-        tmux attach -t $SESSION
-        exit 0;
-    fi
+#     if [ $? -eq 0 ]; then
+#         tmux attach -t $SESSION
+#         exit 0;
+#     fi
 
-    tmux new-session -d -s $SESSION
+#     tmux new-session -d -s $SESSION
 
-    if [ "$1" == "v"  ]
-    then
-        tmux split-window -v -t $SESSION:0
-    else
-        tmux split-window -h -t $SESSION:0
-    fi
+#     if [ "$1" == "v"  ]
+#     then
+#         tmux split-window -v -t $SESSION:0
+#     else
+#         tmux split-window -h -t $SESSION:0
+#     fi
 
-    tmux attach -t $SESSION
-}
+#     tmux attach -t $SESSION
+# }
 
 ssh(){
     /usr/bin/ssh "$@"
