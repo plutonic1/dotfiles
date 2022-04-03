@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "dofiles version 2022.02.08-1"
+    echo "dofiles version 2022.04.03-1"
     # export TERM=xterm #tmux workaround
 fi
 
@@ -164,9 +164,7 @@ u() {
 # }
 
 updaterc() {
-	# tmpfolder=$(mktemp -d) && git clone https://github.com/plutonic1/dotfiles.git $tmpfolder && bash "$tmpfolder/install.sh"
-    current_dir=$(pwd)
-    git -C ~/.dotfiles pull || git clone https://github.com/plutonic1/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && stow -t ~ */ && cd $current_dir
+    git -C ~/.dotfiles pull || git clone https://github.com/plutonic1/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && stow -t ~ */
 }
 
 #https://stackoverflow.com/questions/4643438/how-to-search-contents-of-multiple-pdf-files/4643518#4643518
@@ -218,54 +216,6 @@ extract() {
         echo "'$1' is not a valid file!"
     fi
 }
-
-# k() {
-#     if ! tmux ls | grep -q "copy"; then
-#         tmux new -s copy
-#     else
-#         tmux a -t copy
-#     fi
-# }
-
-# t4(){
-#     SESSION=4
-
-#     tmux has-session -t $SESSION &> /dev/null
-
-#     if [ $? -eq 0 ]; then
-#         tmux attach -t $SESSION
-#         exit 0;
-#     fi
-
-#     tmux new-session -d -s $SESSION
-#     tmux split-window -h -t $SESSION:0
-#     tmux split-window -h -t $SESSION:0
-#     tmux split-window -h -t $SESSION:0
-#     tmux select-layout -t $SESSION "a490,119x39,0,0[120x19,0,0{59x19,0,0,11,60x19,60,0,12},120x19,0,20{59x19,0,20,13,60x19,60,20,18}]"
-#     tmux attach -t $SESSION
-# }
-
-# t2(){
-#     SESSION=2
-
-#     tmux has-session -t $SESSION &> /dev/null
-
-#     if [ $? -eq 0 ]; then
-#         tmux attach -t $SESSION
-#         exit 0;
-#     fi
-
-#     tmux new-session -d -s $SESSION
-
-#     if [ "$1" == "v"  ]
-#     then
-#         tmux split-window -v -t $SESSION:0
-#     else
-#         tmux split-window -h -t $SESSION:0
-#     fi
-
-#     tmux attach -t $SESSION
-# }
 
 ssh(){
     /usr/bin/ssh "$@"
