@@ -17,7 +17,7 @@ HISTCONTROL=ignoredups:ignorespace
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test1000.zip'
+alias speedtest='wget -O /dev/null https://speed.hetzner.de/100MB.bin'
 
 alias vnc='vncserver :1 -geometry 1600x900 -depth 24'
 
