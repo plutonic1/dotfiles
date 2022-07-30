@@ -87,13 +87,13 @@ if ! uname -a | grep -q "lineageos"; then
     alias chgrp='chgrp --preserve-root'
 fi
 
-if uname -a | grep -q "microsoft"; then
+if uname -a | grep -qi "microsoft"; then
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-	ss -a | grep -q $SSH_AUTH_SOCK
-	if [ $? -ne 0 ]; then
+	# ss -a | grep -q $SSH_AUTH_SOCK
+	# if [ $? -ne 0 ]; then
 			rm -f $SSH_AUTH_SOCK
-			(setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:/mnt/c/Users/plutonic/Desktop/Tausch/Tools/wsl2-ssh-pageant.exe >/dev/null 2>&1 &)
-	fi
+			(setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:/mnt/c/Users/user/Desktop/Tausch/Tools/wsl2-ssh-pageant.exe >/dev/null 2>&1 &)
+	# fi
 fi
 
 if [ -f "$HOME/.aliases" ];

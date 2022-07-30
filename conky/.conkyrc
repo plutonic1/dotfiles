@@ -90,7 +90,7 @@ ${template1 public\ IPv4}                                                   ${te
 ${template1 public\ IPv6}                                                   ${template3}${execi 1800 timeout 5 wget http://v6.ipv6-test.com/api/myip.php -q -O -}
 
 ${execp ~/.conky_ips.sh wlp4s0 WLAN}
-yy${template1 AP}                                                             ${template3}${wireless_essid wlp2s0}
+${template1 AP}                                                             ${template3}${wireless_essid wlp2s0}
 ${template1 Signal}             ${template2}${wireless_link_qual_perc wlp2s0} ${template3}${wireless_link_bar wlp2s0}
 ${template1 Download}           ${template2}${downspeedf wlp2s0}Kb/s        ${template3}${downspeedgraph wlp2s0}
 ${template1 Upload}             ${template2}${upspeedf wlp2s0}Kb/s          ${template3}${upspeedgraph wlp2s0}
