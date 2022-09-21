@@ -9,9 +9,8 @@ fi
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
+# https://unix.stackexchange.com/a/265649
+export HISTCONTROL=ignoreboth:erasedups
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
