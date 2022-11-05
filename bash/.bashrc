@@ -2,7 +2,7 @@ shopt -s histverify
 
 if [ "$TERM" != 'dumb'  ]
 then
-    echo "dofiles version 2022.04.03-1"
+    echo "dofiles version 2022.11.05-1"
     # export TERM=xterm #tmux workaround
 fi
 
