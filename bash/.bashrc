@@ -237,7 +237,7 @@ wsl_docker(){
 	fi
 }
 
-function yt(){
+yt(){
  d=$(mktemp)
  $VISUAL $d
  yt-dlp -a $d
