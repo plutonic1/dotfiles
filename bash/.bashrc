@@ -237,6 +237,13 @@ wsl_docker(){
 	fi
 }
 
+function yt(){
+ d=$(mktemp)
+ $VISUAL $d
+ yt-dlp -a $d
+}
+
+
 
 export VISUAL=vi
 export LANG=de_DE.UTF-8
