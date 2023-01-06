@@ -1,11 +1,5 @@
 shopt -s histverify
 
-if [ "$TERM" != 'dumb'  ]
-then
-    echo "dofiles version 2022.11.05-1"
-    # export TERM=xterm #tmux workaround
-fi
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -68,14 +62,6 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-#alias grep='grep --color=F'
-#alias fgrep='fgrep --color=tty'
-#alias egrep='egrep --color=tty'
-
 if ! uname -a | grep -q "lineageos"; then
 	alias grep="grep --color=auto"	
 	alias rm='rm -I --preserve-root' # do not delete / or prompt if deleting more than 3 files at a time
@@ -86,6 +72,7 @@ if ! uname -a | grep -q "lineageos"; then
     alias chgrp='chgrp --preserve-root'
 fi
 
+# for unsing my Yubikey with WSL
 if uname -a | grep -qi "microsoft"; then
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 	# ss -a | grep -q $SSH_AUTH_SOCK
@@ -238,14 +225,13 @@ wsl_docker(){
 }
 
 yt(){
- d=$(mktemp)
- $VISUAL $d
- yt-dlp -a $d
+  d=$(mktemp)
+  $VISUAL $d
+  yt-dlp -a $d
 }
 
 
-
-export VISUAL=vi
+export VISUAL=vim
 export LANG=de_DE.UTF-8
 
 #LS_COLORS='di=36:ln=32:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43':
