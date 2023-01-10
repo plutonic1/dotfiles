@@ -75,11 +75,11 @@ fi
 # for unsing my Yubikey with WSL
 if uname -a | grep -qi "microsoft"; then
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-	# ss -a | grep -q $SSH_AUTH_SOCK
-	# if [ $? -ne 0 ]; then
+	ss -a | grep -q $SSH_AUTH_SOCK
+	if [ $? -ne 0 ]; then
 			rm -f $SSH_AUTH_SOCK
-			(setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:/mnt/c/Users/user/Desktop/Tausch/Tools/wsl2-ssh-pageant.exe >/dev/null 2>&1 &)
-	# fi
+			(setsid nohup socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:/mnt/c/Users/plutonic/Desktop/Tausch/Tools/wsl2-ssh-pageant.exe >/dev/null 2>&1 &)
+	fi
 fi
 
 if [ -f "$HOME/.aliases" ];
@@ -139,16 +139,6 @@ u() {
     fi
 }
 
-# update_pip(){
-#     if which pip2 &> /dev/null; then
-#         pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip2 install -U
-#     fi
-
-#     if which pip3 &> /dev/null; then
-#         pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs "$(which sudo)" pip3 install -U
-#     fi
-# }
-
 updaterc() {
     git -C ~/.dotfiles pull || git clone https://github.com/plutonic1/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && stow -t ~ */
 }
@@ -200,15 +190,6 @@ extract() {
         esac
     else
         echo "'$1' is not a valid file!"
-    fi
-}
-
-ssh(){
-    /usr/bin/ssh "$@"
-    
-    if [ $? -eq "255" ]; then
-        echo "fixing gpg..."
-        gpg-connect-agent updatestartuptty /bye >/dev/null
     fi
 }
 
