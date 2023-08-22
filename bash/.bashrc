@@ -82,6 +82,13 @@ if uname -a | grep -qi "microsoft"; then
 	fi
 fi
 
+# restart gpg-agent on error
+if uname -a | grep -qi "linux"; then
+  gpg --card-status &> /dev/null || {
+    gpg-connect-agent updatestartuptty /bye
+  }
+fi
+
 if [ -f "$HOME/.aliases" ];
 then
     source "$HOME/.aliases"
