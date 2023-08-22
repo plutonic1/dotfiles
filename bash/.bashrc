@@ -12,23 +12,13 @@ shopt -s checkwinsize
 
 alias speedtest='wget -O /dev/null https://speed.hetzner.de/100MB.bin'
 
-alias vnc='vncserver :1 -geometry 1600x900 -depth 24'
-
 alias ipp='echo $(wget -qO- http://ipecho.net/plain)'
-
-alias ix='curl -F "f:1=<-" ix.io'
-
-alias last10='find . -type f -printf "%C+ %p\n" | sort -rn | head -n 10'
-
-alias a='tmux a -t $1'
-
-alias http='python3 -m http.server'
 
 alias pw='head /dev/urandom | tr -dc A-Za-z0-9 | head -c20; echo'
 
-alias dog='pygmentize -g' # https://stackoverflow.com/questions/7851134/syntax-highlighting-colorizing-cat/14799752#14799752
-
 alias n='$(which sudo) netstat -tulpen'
+
+alias vim=neovim
 
 #let ssh use the gpg-agent for auth
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -162,18 +152,6 @@ key() {
     gpg --keyserver pgpkeys.mit.edu --recv-key "$1"
 }
 
-r() {
-	$(which sudo) true
-    echo reboot in ...
-
-    for i in {10..1}
-    do
-        echo -e "$i"
-        sleep 1
-    done
-    $(which sudo) reboot && exit
-}
-
 fixlocale() {
     sudo locale-gen de_DE.UTF-8
     sudo update-locale LANG=de_DE.UTF-8
@@ -202,26 +180,13 @@ extract() {
     fi
 }
 
-wsl_docker(){
-	DOCKER_DISTRO="Ubuntu-20.04"
-	DOCKER_DIR=/mnt/wsl/shared-docker
-	DOCKER_SOCK="$DOCKER_DIR/docker.sock"
-	export DOCKER_HOST="unix://$DOCKER_SOCK"
-	if [ ! -S "$DOCKER_SOCK" ]; then
-		mkdir -pm o=,ug=rwx "$DOCKER_DIR"
-		chgrp docker "$DOCKER_DIR"
-		/mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
-	fi
-}
-
 yt(){
   d=$(mktemp)
   $VISUAL $d
   yt-dlp -a $d
 }
 
-
-export VISUAL=vim
+export VISUAL=nvim
 export LANG=de_DE.UTF-8
 
 #LS_COLORS='di=36:ln=32:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43':
