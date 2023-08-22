@@ -86,6 +86,8 @@ fi
 if uname -a | grep -qi "linux"; then
   gpg --card-status &> /dev/null || {
     gpg-connect-agent updatestartuptty /bye
+    gpgconf --launch gpg-agent
+    gpg --card-status
   }
 fi
 
