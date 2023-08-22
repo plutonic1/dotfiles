@@ -18,7 +18,7 @@ alias pw='head /dev/urandom | tr -dc A-Za-z0-9 | head -c20; echo'
 
 alias n='$(which sudo) netstat -tulpen'
 
-alias vim=neovim
+alias vim=nvim
 
 #let ssh use the gpg-agent for auth
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
