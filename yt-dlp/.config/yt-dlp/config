@@ -1,2 +1,2 @@
 --sponsorblock-mark=all
--o "%(playlist_index|)02d%(playlist_index&_)s%(title)s.%(ext)s
+-o "%(playlist_index|)02d%(playlist_index&_)s%(title)s.%(ext)s"
