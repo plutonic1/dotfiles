@@ -77,6 +77,10 @@ then
     source "$HOME/.aliases"
 fi
 
+zfssnapshotall(){
+    now=`date +"%Y%m%d_%H%M"`; zfs list -o name | tail -n +2 | xargs -I % sudo zfs snapshot "%@$now"
+}
+
 p(){
     ps aux | grep "$1" | grep -v
 }
