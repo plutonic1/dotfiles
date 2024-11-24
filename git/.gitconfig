@@ -1,5 +1,7 @@
 [alias]
-	pushall = !git remote | xargs -L1 git push --all
+    pushall = !git remote | xargs -L1 git push --all
 [user]
-	email = github@plutonic.tk
-	name = plutonic
+    email = github@plutonic.tk
+    name = plutonic
+[init]
+    defaultBranch = main
